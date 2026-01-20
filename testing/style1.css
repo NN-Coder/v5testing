@@ -291,14 +291,12 @@ iframe {
     letter-spacing: 1px;
 }
 
-/* Container for the right-side nav items */
 .header-right {
     display: flex;
     align-items: center;
     gap: 20px;
 }
 
-/* Base style for expanding buttons (Proxies, Settings, etc) */
 .nav-btn {
     display: flex;
     align-items: center;
@@ -323,7 +321,6 @@ iframe {
     font-family: 'Orbitron', sans-serif;
 }
 
-/* Hover expansion for buttons */
 .nav-btn:hover {
     background: rgba(0, 255, 204, 0.1);
     border-color: var(--main-color);
@@ -331,12 +328,11 @@ iframe {
 }
 
 .nav-btn:hover .btn-text {
-    max-width: 150px; /* Adjust based on word length */
+    max-width: 150px; 
     opacity: 1;
     margin-left: 10px;
 }
 
-/* Search Bar Expansion Logic */
 .search-wrapper {
     display: flex;
     align-items: center;
@@ -345,7 +341,7 @@ iframe {
     padding: 8px 12px;
     border-radius: 50px;
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    width: 45px; /* Only wide enough for the icon initially */
+    width: 45px; 
     overflow: hidden;
 }
 
@@ -361,14 +357,12 @@ iframe {
     padding-left: 0;
 }
 
-/* Container for the right-side nav items */
 .header-right {
     display: flex;
     align-items: center;
     gap: 20px;
 }
 
-/* Base style for expanding buttons (Proxies, Settings, etc) */
 .nav-btn {
     display: flex;
     align-items: center;
@@ -393,7 +387,6 @@ iframe {
     font-family: 'Orbitron', sans-serif;
 }
 
-/* Hover expansion for buttons */
 .nav-btn:hover {
     background: rgba(0, 255, 204, 0.1);
     border-color: var(--main-color);
@@ -401,21 +394,20 @@ iframe {
 }
 
 .nav-btn:hover .btn-text {
-    max-width: 150px; /* Adjust based on word length */
+    max-width: 150px; 
     opacity: 1;
     margin-left: 10px;
 }
 
-/* Search Bar Expansion Logic */
 .search-wrapper {
     display: flex;
     align-items: center;
     background: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--main-color);
+    border: 1px solid rgba(0, 255, 204, 0.3);
     padding: 8px 12px;
     border-radius: 50px;
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    width: 45px; /* Only wide enough for the icon initially */
+    width: 45px; 
     overflow: hidden;
 }
 
@@ -431,7 +423,6 @@ iframe {
     padding-left: 0;
 }
 
-/* Hover expansion for Search */
 .search-wrapper:hover, .search-wrapper:focus-within {
     width: 250px;
     background: rgba(255, 255, 255, 0.1);

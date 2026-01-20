@@ -291,14 +291,12 @@ iframe {
     letter-spacing: 1px;
 }
 
-/* Container for the right-side nav items */
 .header-right {
     display: flex;
     align-items: center;
     gap: 20px;
 }
 
-/* Base style for expanding buttons (Proxies, Settings, etc) */
 .nav-btn {
     display: flex;
     align-items: center;
@@ -323,7 +321,6 @@ iframe {
     font-family: 'Orbitron', sans-serif;
 }
 
-/* Hover expansion for buttons */
 .nav-btn:hover {
     background: rgba(0, 255, 204, 0.1);
     border-color: var(--main-color);
@@ -331,12 +328,11 @@ iframe {
 }
 
 .nav-btn:hover .btn-text {
-    max-width: 150px; /* Adjust based on word length */
+    max-width: 150px; 
     opacity: 1;
     margin-left: 10px;
 }
 
-/* Search Bar Expansion Logic */
 .search-wrapper {
     display: flex;
     align-items: center;
@@ -345,7 +341,7 @@ iframe {
     padding: 8px 12px;
     border-radius: 50px;
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    width: 45px; /* Only wide enough for the icon initially */
+    width: 45px; 
     overflow: hidden;
 }
 
@@ -361,14 +357,12 @@ iframe {
     padding-left: 0;
 }
 
-/* Container for the right-side nav items */
 .header-right {
     display: flex;
     align-items: center;
-    gap: 30px; /* Increased gap for better readability */
+    gap: 30px; 
 }
 
-/* The style logic you provided */
 .nav-icon-link {
     background: none;
     border: none;
@@ -386,10 +380,9 @@ iframe {
 .nav-icon-link:hover {
     color: var(--accent-color);
     filter: drop-shadow(0 0 8px var(--accent-color));
-    transform: translateY(-2px); /* Subtle lift effect */
+    transform: translateY(-2px); 
 }
 
-/* Ensure the icon and text stay aligned */
 .nav-icon-link i {
     display: flex;
     align-items: center;
