@@ -15,7 +15,7 @@
     <header class="site-header">
         <div class="header-content">
             <div class="header-left">
-                <img src="icons/logo.ico" alt="EdCube Logo" class="logo-img">
+                <img src="icons/logo.ico" alt="EdCube Logo" class="logo-img" loading="lazy">
             </div>
             <nav class="header-right">
                 <a href="/proxies" class="nav-btn">
@@ -48,43 +48,7 @@
                 </button>
                 
                 <div class="carousel-track-container">
-                    <div class="carousel-track" id="carouselTrack">
-                        <div class="carousel-slide active" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('game_images/bitlife-thumb.jpg');">
-                            <div class="slide-content">
-                                <div class="slide-info-box">
-                                    <h3 class="slide-title">Bitlife</h3>
-                                    <div class="slide-expandable-content">
-                                        <p class="slide-description">Live your life however you want in this simulator.</p>
-                                        <a href="games/game.html" class="nav-btn slide-play-btn">Play Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="carousel-slide" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('game_images/placeholder.jpg');">
-                            <div class="slide-content">
-                                <div class="slide-info-box">
-                                    <h3 class="slide-title">Mystery Game</h3>
-                                    <div class="slide-expandable-content">
-                                        <p class="slide-description">A new adventure awaits in the digital world.</p>
-                                        <a href="#" class="nav-btn slide-play-btn">Play Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="carousel-slide" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('game_images/placeholder.jpg');">
-                            <div class="slide-content">
-                                <div class="slide-info-box">
-                                    <h3 class="slide-title">Neon Racer</h3>
-                                    <div class="slide-expandable-content">
-                                        <p class="slide-description">High-speed action across the grid.</p>
-                                        <a href="#" class="nav-btn slide-play-btn">Play Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <div class="carousel-track" id="carouselTrack"></div>
                 </div>
 
                 <button class="carousel-arrow next" onclick="moveSlide(1)">
@@ -104,9 +68,7 @@
             <div id="noResults" style="display: none; text-align: center; margin-top: 20px; color: #00ffcc; opacity: 0.7;">
                 No games found matching your search.
             </div>
-            <div class="game-grid">
-                <a href="games/game.html" class="game-card"><div class="card-inner"><div class="card-thumb" style="background-image: url('game_images/bitlife-thumb.jpg');"></div><div class="card-overlay"><span class="card-title">Bitlife</span></div></div></a>
-                </div>
+            <div class="game-grid"></div>
         </section>
     </main>
 
@@ -119,38 +81,112 @@
    <script>
         lucide.createIcons();
         
-        // Carousel Logic
+        // Global state
+        let allGames = [];
         let currentSlide = 0;
         let autoScrollTimer;
-        const slides = document.querySelectorAll('.carousel-slide');
 
         /**
-         * Main function to switch slides
-         * @param {number} index - The index of the slide to show
+         * Opens the site in a clean about:blank tab for privacy/cloaking
          */
+        function openBlank() {
+            const win = window.open();
+            if (!win) {
+                alert("Please allow popups to use this feature.");
+                return;
+            }
+            const url = window.location.href;
+            const iframe = win.document.createElement('iframe');
+            
+            iframe.style.width = "100%";
+            iframe.style.height = "100%";
+            iframe.style.border = "none";
+            iframe.style.position = "fixed";
+            iframe.style.top = "0";
+            iframe.style.left = "0";
+            iframe.src = url;
+            
+            win.document.body.style.margin = "0";
+            win.document.body.appendChild(iframe);
+        }
+
+        /**
+         * Fetches games from JSON and initializes both the Carousel and the Grid
+         */
+        async function initEdCube() {
+            try {
+                const response = await fetch('games.json');
+                allGames = await response.json();
+                
+                renderCarousel(allGames.slice(0, 3)); // Feature the first 3 games
+                renderGrid(allGames);
+                resetTimer(); // Start auto-scroll
+            } catch (error) {
+                console.error("Error loading games.json:", error);
+                document.querySelector('.game-grid').innerHTML = "<p>Failed to load game library.</p>";
+            }
+        }
+
+        /**
+         * Dynamically builds the carousel slides
+         */
+        function renderCarousel(featuredGames) {
+            const track = document.getElementById('carouselTrack');
+            track.innerHTML = featuredGames.map((game, index) => `
+                <div class="carousel-slide ${index === 0 ? 'active' : ''}" 
+                     style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('${game.image}');">
+                    <div class="slide-content">
+                        <div class="slide-info-box">
+                            <h3 class="slide-title">${game.title}</h3>
+                            <div class="slide-expandable-content">
+                                <p class="slide-description">${game.description || 'Experience the next generation of web gaming.'}</p>
+                                <a href="games/game.html?id=${game.id}" class="nav-btn slide-play-btn">Play Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        /**
+         * Renders the game cards into the main library grid
+         */
+        function renderGrid(gamesToDisplay) {
+            const grid = document.querySelector('.game-grid');
+            grid.innerHTML = ''; 
+
+            gamesToDisplay.forEach(game => {
+                const card = document.createElement('a');
+                card.href = `games/game.html?id=${game.id}`;
+                card.className = 'game-card';
+                
+                card.innerHTML = `
+                    <div class="card-inner">
+                        <div class="card-thumb" style="background-image: url('${game.image}');" loading="lazy"></div>
+                        <div class="card-overlay">
+                            <span class="card-title">${game.title}</span>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Carousel Controls
         function showSlide(index) {
-            // Remove active class from all slides
+            const slides = document.querySelectorAll('.carousel-slide');
+            if (slides.length === 0) return;
+            
             slides.forEach(slide => slide.classList.remove('active'));
-            
-            // Calculate index to loop back/forward
             currentSlide = (index + slides.length) % slides.length;
-            
-            // Add active class to the current slide
             slides[currentSlide].classList.add('active');
         }
 
-        /**
-         * Handles manual button clicks
-         * @param {number} step - Direction (1 for next, -1 for prev)
-         */
         function moveSlide(step) {
             showSlide(currentSlide + step);
-            resetTimer(); // Restart the auto-scroll countdown
+            resetTimer(); 
         }
 
-        /**
-         * Starts or restarts the 5-second auto-rotate timer
-         */
         function resetTimer() {
             clearInterval(autoScrollTimer);
             autoScrollTimer = setInterval(() => {
@@ -158,28 +194,19 @@
             }, 5000);
         }
 
-        // Initial start
-        resetTimer();
-
         // Search Logic
-        const searchInput = document.getElementById('gameSearch');
-        const cards = document.querySelectorAll('.game-card');
-        const noResults = document.getElementById('noResults');
-        
-        searchInput.addEventListener('input', (e) => {
+        document.getElementById('gameSearch').addEventListener('input', (e) => {
             const term = e.target.value.toLowerCase();
-            let visibleCount = 0;
-            cards.forEach(card => {
-                const title = card.querySelector('.card-title').innerText.toLowerCase();
-                if (title.includes(term)) {
-                    card.style.display = 'block';
-                    visibleCount++;
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-            noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+            const filtered = allGames.filter(game => 
+                game.title.toLowerCase().includes(term)
+            );
+            
+            renderGrid(filtered);
+            const noResults = document.getElementById('noResults');
+            noResults.style.display = filtered.length === 0 ? 'block' : 'none';
         });
+
+        window.addEventListener('DOMContentLoaded', initEdCube);
     </script>
 </body>
 </html>

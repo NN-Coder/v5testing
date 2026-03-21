@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bitlife | EdCube</title>
+    <title>EdCube | Loading...</title>
     <link rel="icon" href="../icons/logo.ico" type="image/x-icon">
 
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -15,23 +15,29 @@
     <header class="site-header">
         <div class="header-content">
             <div class="header-left">
-                <a href="../home.html"><img src="../icons/logo.ico" alt="EdCube Logo" class="logo-img" title="Back to Home"></a>
+                <a href="../home.html">
+                    <img src="../icons/logo.ico" alt="EdCube Logo" class="logo-img" title="Back to Home" loading="lazy">
+                </a>
             </div>
             <nav class="header-right">
-                <a href="../home.html" class="nav-icon-link header-home" title="Back to Home">
+                <a href="../home.html" class="nav-icon-link" title="Back to Home">
                     <i data-lucide="home"></i>
                     <span>Home</span>
                 </a>
+                <button class="nav-icon-link" onclick="openBlank()" title="About:Blank Cloaking">
+                    <i data-lucide="external-link"></i>
+                    <span>Cloak</span>
+                </button>
             </nav>
         </div>
     </header>
 
     <main class="main-wrapper">
         <section class="game-section">
-            <h1 class="game-title">Bitlife</h1>
+            <h1 class="game-title" id="displayTitle">Loading...</h1>
 
             <div class="iframe-container">
-                <iframe src="../game_sources/" id="gameFrame" allowfullscreen></iframe>
+                <iframe src="" id="gameFrame" allowfullscreen></iframe>
                 
                 <div class="options-bar">
                     <button class="nav-icon-link" id="fullscreenBtn" title="Fullscreen (F)">
@@ -40,7 +46,7 @@
                     <button class="nav-icon-link" id="shareBtn" title="Share">
                         <i data-lucide="share-2"></i>
                     </button>
-                    <a href="#" class="nav-icon-link" title="Report Bug">
+                    <a href="https://github.com/your-repo/issues" target="_blank" class="nav-icon-link" title="Report Bug">
                         <i data-lucide="flag"></i>
                     </a>
                 </div>
@@ -49,27 +55,7 @@
 
         <section class="recommended-section">
             <h2 class="section-subtitle">Recommended Games</h2>
-            <div class="game-grid">
-                
-                <a href="#" class="game-card">
-                    <div class="card-inner">
-                        <div class="card-thumb" style="background-image: url('game-thumb.jpg');"></div>
-                        <div class="card-overlay">
-                            <span class="card-title">Game Title</span>
-                        </div>
-                    </div>
-                </a>
-
-                <a href="#" class="game-card">
-                    <div class="card-inner">
-                        <div class="card-thumb" style="background-image: url('game-thumb.jpg');"></div>
-                        <div class="card-overlay">
-                            <span class="card-title">Game Title</span>
-                        </div>
-                    </div>
-                </a>
-
-            </div>
+            <div class="game-grid" id="recommendedGrid"></div>
         </section>
 
         <a href="../home.html" class="back-link">
@@ -84,5 +70,31 @@
     </footer>
 
     <script src="script.js"></script>
+    <script>
+        /**
+         * Implementation of the about:blank cloaking utility 
+         * consistent with your home page logic.
+         */
+        function openBlank() {
+            const win = window.open();
+            if (!win) {
+                alert("Please allow popups to use this feature.");
+                return;
+            }
+            const url = window.location.href;
+            const iframe = win.document.createElement('iframe');
+            
+            iframe.style.width = "100%";
+            iframe.style.height = "100%";
+            iframe.style.border = "none";
+            iframe.style.position = "fixed";
+            iframe.style.top = "0";
+            iframe.style.left = "0";
+            iframe.src = url;
+            
+            win.document.body.style.margin = "0";
+            win.document.body.appendChild(iframe);
+        }
+    </script>
 </body>
 </html>
