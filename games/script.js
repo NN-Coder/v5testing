@@ -1,14 +1,32 @@
+// Lucide icons
 lucide.createIcons();
 
-/**
- * Main function to load game data based on URL parameters
- * Example: game.html?id=bitlife
- */
+// Open in About:Blank
+function openBlank() {
+    const win = window.open();
+    if (!win) {
+        alert("Please allow popups to use this feature.");
+        return;
+    }
+    const url = window.location.href;
+    const iframe = win.document.createElement('iframe');
+    
+    iframe.style.width = "100%";
+    iframe.style.height = "100%";
+    iframe.style.border = "none";
+    iframe.style.position = "fixed";
+    iframe.style.top = "0";
+    iframe.style.left = "0";
+    iframe.src = url;
+    
+    win.document.body.style.margin = "0";
+    win.document.body.appendChild(iframe);
+}
+// Dynamic game loading (game.html?id=game-id)
 async function loadGameData() {
     const displayTitle = document.getElementById('displayTitle');
     const gameFrame = document.getElementById('gameFrame');
     
-    // 1. Extract the 'id' from the URL
     const params = new URLSearchParams(window.location.search);
     const gameId = params.get('id');
 
@@ -18,23 +36,17 @@ async function loadGameData() {
     }
 
     try {
-        // 2. Fetch the central games.json from the root directory
-        // Path is ../ because this script is inside the /games/ folder
-        const response = await fetch('../games.json');
+        const response = await fetch('games.json');
         const allGames = await response.json();
 
-        // 3. Find the specific game data matching the ID
         const gameData = allGames.find(g => g.id === gameId);
 
         if (gameData) {
-            // Update the Browser Tab Title and Header
             document.title = `${gameData.title} | EdCube`;
             displayTitle.innerText = gameData.title;
             
-            // Update the Iframe Source to the game's index file
             gameFrame.src = `../game_sources/${gameData.id}/index.html`;
             
-            // 4. Generate recommendations excluding the current game
             renderRecommendations(allGames, gameId);
         } else {
             displayTitle.innerText = "Game Not Found";
@@ -48,23 +60,22 @@ async function loadGameData() {
 }
 
 /**
- * Dynamically populates the recommended games grid
- * @param {Array} allGames - The full list of games from JSON
- * @param {string} currentId - The ID of the game currently being played
+ * Dynamic recommended games
+ * @param {Array} allGames - full list of games from JSON
+ * @param {string} currentId - id of current game
  */
 function renderRecommendations(allGames, currentId) {
     const recGrid = document.getElementById('recommendedGrid');
     
-    // Filter out the current game and take up to 3 others
     const filtered = allGames
         .filter(g => g.id !== currentId)
-        .sort(() => 0.5 - Math.random()) // Randomize the suggestions
+        .sort(() => 0.5 - Math.random())
         .slice(0, 3);
 
     recGrid.innerHTML = filtered.map(game => `
         <a href="game.html?id=${game.id}" class="game-card">
             <div class="card-inner">
-                <div class="card-thumb" style="background-image: url('../${game.image}');" loading="lazy"></div>
+                <div class="card-thumb" style="background-image: url('../${game.image}');"></div>
                 <div class="card-overlay">
                     <span class="card-title">${game.title}</span>
                 </div>
@@ -73,9 +84,7 @@ function renderRecommendations(allGames, currentId) {
     `).join('');
 }
 
-/**
- * Fullscreen Toggle Logic
- */
+// Fullscreen
 const gameFrame = document.getElementById('gameFrame');
 const fullscreenBtn = document.getElementById('fullscreenBtn');
 
@@ -93,14 +102,11 @@ if (fullscreenBtn) {
     fullscreenBtn.addEventListener('click', toggleFullscreen);
 }
 
-// Keyboard shortcut 'F' for fullscreen
 document.addEventListener('keydown', (e) => {
     if (e.key.toLowerCase() === 'f') toggleFullscreen();
 });
 
-/**
- * Web Share API Logic
- */
+// Share
 const shareBtn = document.getElementById('shareBtn');
 if (shareBtn) {
     shareBtn.addEventListener('click', async () => {
@@ -114,7 +120,6 @@ if (shareBtn) {
                 console.log("Share cancelled");
             }
         } else {
-            // Fallback for browsers that don't support navigator.share
             const tempInput = document.createElement('input');
             document.body.appendChild(tempInput);
             tempInput.value = window.location.href;
@@ -126,5 +131,4 @@ if (shareBtn) {
     });
 }
 
-// Initialize loading when the DOM is ready
 window.addEventListener('DOMContentLoaded', loadGameData);

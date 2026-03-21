@@ -72,7 +72,7 @@ body {
     transition: transform 0.3s ease;
 }
 
-/* Navigation Buttons */
+/* Nav Buttons */
 .nav-btn {
     display: flex;
     align-items: center;
@@ -109,7 +109,7 @@ body {
     margin-left: 10px;
 }
 
-/* Search Bar (removed due to many bugs, new one will be above the game grid)
+/* Header Search Bar (removed due to many bugs, new one will be above the game grid)
 .search-wrapper {
     display: flex;
     align-items: center;
@@ -302,7 +302,7 @@ body {
     transform: translateY(0);
 }
 
-/* Mobile Adjustments */
+/* Mobile adjustments */
 @media (max-width: 600px) {
     .header-content {
         justify-content: center;
@@ -317,7 +317,7 @@ body {
     }
 }
 
-/* --- Featured Section Layout --- */
+/* Featured carousel */
 .featured-section {
     width: 100%;
     max-width: 1200px;
@@ -327,11 +327,11 @@ body {
 .carousel-container {
     position: relative;
     width: 100%;
-    height: 380px; /* Adjusted height for better vertical movement */
+    height: 380px; 
     border-radius: 20px;
     overflow: hidden;
     border: 2px solid var(--border-glow);
-    background: #000; /* Dark base for fade transitions */
+    background: #000; 
 }
 
 .carousel-track-container {
@@ -340,7 +340,7 @@ body {
     position: relative;
 }
 
-/* --- Slide Transitions (Fade-In) --- */
+/* Slide transitions */
 .carousel-slide {
     position: absolute;
     top: 0;
@@ -350,7 +350,6 @@ body {
     background-size: cover;
     background-position: center;
     opacity: 0;
-    /* subtle scale effect added to the fade for a premium feel */
     transform: scale(1.05); 
     transition: opacity 1.2s ease-in-out, transform 1.2s ease-in-out;
     display: flex;
@@ -364,25 +363,23 @@ body {
     z-index: 1;
 }
 
-/* --- Centered Content & Bottom Alignment --- */
 .slide-content {
     display: flex;
     justify-content: center;
-    align-items: flex-end; /* Title starts at the bottom */
+    align-items: flex-end; 
     width: 100%;
     height: 100%;
-    padding-bottom: 50px; /* Space from bottom edge */
+    padding-bottom: 50px; 
     z-index: 2;
 }
 
 .slide-info-box {
-    background: rgba(10, 5, 20, 0); /* Invisible background initially */
-    border: 1px solid transparent;  /* Invisible border initially */
+    background: rgba(10, 5, 20, 0); 
+    border: 1px solid transparent;  
     padding: 15px 30px;
     border-radius: 15px;
     text-align: center;
     max-width: 350px; 
-    /* Handles upward slide and expansion */
     transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     transform: translateY(0); 
 }
@@ -395,7 +392,7 @@ body {
     transition: transform 0.4s ease;
 }
 
-/* --- Expandable Content (Description/Button) --- */
+/* Expandable animated carousel */
 .slide-expandable-content {
     max-height: 0;
     opacity: 0;
@@ -417,13 +414,11 @@ body {
     font-size: 0.85rem;
 }
 
-/* --- Hover State: Slide Up & Expand --- */
 .carousel-slide:hover .slide-info-box {
     background: rgba(10, 5, 20, 0.9);
     border: 1px solid var(--main-color);
     box-shadow: var(--neon-glow);
-    /* Moves the box toward the center of the thumbnail */
-    transform: translateY(-80px); 
+    transform: translateY(-20px); 
 }
 
 .carousel-slide:hover .slide-expandable-content {
@@ -433,7 +428,7 @@ body {
     padding-bottom: 10px;
 }
 
-/* --- Navigation Controls --- */
+/* --- Carousel controls --- */
 .carousel-arrow {
     position: absolute;
     top: 50%;
@@ -460,7 +455,7 @@ body {
 .prev { left: 20px; }
 .next { right: 20px; }
 
-/* Mobile Adjustments */
+/* Mobile adjustments */
 @media (max-width: 600px) {
     .carousel-container { height: 280px; }
     .slide-info-box { max-width: 85%; }

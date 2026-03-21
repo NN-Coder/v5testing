@@ -12,6 +12,7 @@
 </head>
 <body>
 
+    <!-- Header -->
     <header class="site-header">
         <div class="header-content">
             <div class="header-left">
@@ -36,9 +37,11 @@
         <section class="game-section">
             <h1 class="game-title" id="displayTitle">Loading...</h1>
 
+            <!-- Game Frame -->
             <div class="iframe-container">
                 <iframe src="" id="gameFrame" allowfullscreen></iframe>
                 
+                <!-- Options Bar -->
                 <div class="options-bar">
                     <button class="nav-icon-link" id="fullscreenBtn" title="Fullscreen (F)">
                         <i data-lucide="maximize"></i>
@@ -53,6 +56,7 @@
             </div>
         </section>
 
+        <!-- Recommended Games -->
         <section class="recommended-section">
             <h2 class="section-subtitle">Recommended Games</h2>
             <div class="game-grid" id="recommendedGrid"></div>
@@ -63,6 +67,7 @@
         </a>
     </main>
 
+    <!-- Footer -->
     <footer class="site-footer">
         <div class="footer-content">
             <p>Copyright © 2024-2026 All Rights Reserved by EdCube.</p>
@@ -70,31 +75,6 @@
     </footer>
 
     <script src="script.js"></script>
-    <script>
-        /**
-         * Implementation of the about:blank cloaking utility 
-         * consistent with your home page logic.
-         */
-        function openBlank() {
-            const win = window.open();
-            if (!win) {
-                alert("Please allow popups to use this feature.");
-                return;
-            }
-            const url = window.location.href;
-            const iframe = win.document.createElement('iframe');
-            
-            iframe.style.width = "100%";
-            iframe.style.height = "100%";
-            iframe.style.border = "none";
-            iframe.style.position = "fixed";
-            iframe.style.top = "0";
-            iframe.style.left = "0";
-            iframe.src = url;
-            
-            win.document.body.style.margin = "0";
-            win.document.body.appendChild(iframe);
-        }
-    </script>
+
 </body>
 </html>

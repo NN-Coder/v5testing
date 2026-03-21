@@ -1,0 +1,14 @@
+[
+    {
+        "id": "bitlife",
+        "title": "Bitlife",
+        "image": "game_images/bitlife-thumb.jpg",
+        "description": "Live your life however you want in this simulator."
+    },
+    {
+        "id": "neon-racer",
+        "title": "Neon Racer",
+        "image": "game_images/placeholder.jpg",
+        "description": "High-speed action across the grid."
+    }
+]
