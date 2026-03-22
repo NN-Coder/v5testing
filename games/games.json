@@ -12,16 +12,16 @@
         "description": "Find the imposter in this social deduction game."
     },
     {
-        "id": "basketball-stars",
-        "title": "Basketball Stars",
-        "image": "game_images/basketball-stars.jpg",
-        "description": "Show off your skills in this fast-paced basketball game."
-    },
-    {
         "id": "basket-random",
         "title": "Basket Random",
         "image": "game_images/basket-random.jpg",
         "description": "Physics-based basketball with unpredictable controls."
+    },
+    {
+        "id": "basketball-stars",
+        "title": "Basketball Stars",
+        "image": "game_images/basketball-stars.jpg",
+        "description": "Show off your skills in this fast-paced basketball game."
     },
     {
         "id": "bitlife",
@@ -108,16 +108,16 @@
         "description": "Jump and fly through danger in this rhythm platformer."
     },
     {
-        "id": "gladihoppers",
-        "title": "Gladihoppers",
-        "image": "game_images/gladihoppers.jpg",
-        "description": "Funny gladiator combat with hopping physics."
-    },
-    {
         "id": "getaway-shootout",
         "title": "Getaway Shootout",
         "image": "game_images/getaway-shootout.jpg",
         "description": "Race to the extraction point in this chaotic platformer."
+    },
+    {
+        "id": "gladihoppers",
+        "title": "Gladihoppers",
+        "image": "game_images/gladihoppers.jpg",
+        "description": "Funny gladiator combat with hopping physics."
     },
     {
         "id": "hollow-knight",
@@ -186,16 +186,16 @@
         "description": "Capture territory by drawing loops."
     },
     {
-        "id": "polytrack",
-        "title": "Polytrack",
-        "image": "game_images/polytrack.jpg",
-        "description": "Low-poly racing and track building."
-    },
-    {
         "id": "ping-pong-chaos",
         "title": "Ping Pong Chaos",
         "image": "game_images/ping-pong-chaos.jpg",
         "description": "Wacky ping pong matches with unpredictable physics."
+    },
+    {
+        "id": "polytrack",
+        "title": "Polytrack",
+        "image": "game_images/polytrack.jpg",
+        "description": "Low-poly racing and track building."
     },
     {
         "id": "ragdoll-archers",
